@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/sprites/bg/bg.png" type="Texture" id=1]
+
+[node name="Background" type="ParallaxBackground"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 320.0
+margin_bottom = 50.0
+rect_scale = Vector2( 1, 5.36 )
+color = Color( 0, 0, 0, 1 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+position = Vector2( 0, 40 )
+motion_scale = Vector2( 0.2, 1 )
+motion_mirroring = Vector2( 64, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer"]
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 320, 112 )

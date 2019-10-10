@@ -1,0 +1,212 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://scripts/MegaBot.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Bullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/sprites/player/spritesheet.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "dead"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 2 ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 9, 12 ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 5, 8 ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 13 ]
+}
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 4, 10 )
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "dead"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "jump"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "run"
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "run_and_shoot"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "shot"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+
+[sub_resource type="AnimationNodeStateMachine" id=23]
+states/dead/node = SubResource( 8 )
+states/dead/position = Vector2( 553, 69 )
+states/idle/node = SubResource( 9 )
+states/idle/position = Vector2( 351, 69 )
+states/jump/node = SubResource( 10 )
+states/jump/position = Vector2( 351, 235 )
+states/run/node = SubResource( 11 )
+states/run/position = Vector2( 148, 69 )
+states/run_and_shoot/node = SubResource( 12 )
+states/run_and_shoot/position = Vector2( 148, 188 )
+states/shot/node = SubResource( 13 )
+states/shot/position = Vector2( 351, -53 )
+transitions = [ "idle", "dead", SubResource( 14 ), "run", "idle", SubResource( 15 ), "idle", "run", SubResource( 16 ), "jump", "idle", SubResource( 17 ), "idle", "jump", SubResource( 18 ), "idle", "shot", SubResource( 19 ), "shot", "idle", SubResource( 20 ), "run_and_shoot", "run", SubResource( 21 ), "run", "run_and_shoot", SubResource( 22 ) ]
+start_node = "idle"
+end_node = "dead"
+graph_offset = Vector2( 0, 48.588 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=24]
+
+[node name="MegaBot" type="KinematicBody2D"]
+position = Vector2( 35, 28 )
+collision_layer = 2
+collision_mask = 5
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+bullet = ExtResource( 2 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 14, 0 )
+scale = Vector2( 0.2, 0.2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+hframes = 14
+frame = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/dead = SubResource( 1 )
+anims/idle = SubResource( 2 )
+anims/jump = SubResource( 3 )
+anims/run = SubResource( 4 )
+anims/run_and_shoot = SubResource( 5 )
+anims/shot = SubResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -1, 4 )
+shape = SubResource( 7 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 23 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+process_mode = 0
+parameters/playback = SubResource( 24 )
+
+[node name="BulletTime" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+process_mode = 0
+limit_left = 0
+limit_top = 0
+limit_bottom = 0
+limit_smoothed = true
+[connection signal="timeout" from="BulletTime" to="." method="_on_BulletTime_timeout"]
